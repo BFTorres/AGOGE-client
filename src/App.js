@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import axios from 'axios'
-import config from './config'
+//import config from './config'
 import './App.css'
 
 
@@ -9,11 +9,21 @@ import './App.css'
 
 class App extends Component {
 
+  state = {
+    user: null,
+    error: null,
+    fetchingUser: true,
+  }
 
 
 
   render() {
 
+    const {user, error, fetchingUser} = this.state
+    if(fetchingUser){
+  //! REPLACE THIS
+      return <p>Loading...</p>
+    }
 
 
     return (
@@ -23,7 +33,7 @@ class App extends Component {
 
 
 
-        
+
       </div>
     )
   }
