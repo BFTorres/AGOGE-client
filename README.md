@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# AGOGE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+by Bernardo Fonseca Tores
+________________________________________________________________________________
+## Description
+________________________________________________________________________________
 
-## Available Scripts
 
-In the project directory, you can run:
+Company Webpage with integrated Student Portal.
 
-### `yarn start`
+________________________________________________________________________________
+## User Stories
+________________________________________________________________________________
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+404: As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's my fault
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Signup: As a student I can sign up in the student portal so that I can have access to links and lessons
 
-### `yarn test`
+Login: As a user I can login to student portal so that I can start studying
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Logout: As a user I can logout from the platform so no one else can use it
 
-### `yarn build`
+Lessons: As a user I want to see the Lessons so that I can study
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Add notes: As a user I want to add notes to the lessons
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+________________________________________________________________________________
+## Backlog
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Full responsive, e-shop, advanced authorization, external API
+________________________________________________________________________________
+## ROUTES:
+________________________________________________________________________________
 
-### `yarn eject`
+/ - Homepage
+/auth/signup - Signup form
+/auth/login - Login form
+/lessons - lesson list
+/lessons/create - create a lesson
+/lessons/:id - lesson detail
+/profile/me - my details
+404
+________________________________________________________________________________
+## Pages
+________________________________________________________________________________
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Home Page (public)
+Sign up Page (anon only)
+Log in Page (anon only)
+Student Portal - Lesson List Page (user only)
+Student Portal - Lesson Create (user only)
+Student Portal - Lesson Page (user only)
+404 Page (public)
+________________________________________________________________________________
+## Components
+________________________________________________________________________________
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+________________________________________________________________________________
+## Models
+________________________________________________________________________________
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+User model
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+username - String // required
+email - String // required & unique
+password - String // required
+lessons - [ObjectID<lessons>]
 
-## Learn More
+Lessons model
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+lessons - ObjectID<User> // required
+name - String // required
+API Endpoints/Backend Routes
+GET /auth/me
+POST /auth/signup
+body:
+username
+email
+password
+POST /auth/login
+body:
+username
+password
+POST /auth/logout
+body: (empty)
+POST /user/me/lessons
+body:
+lessonId
+DELETE /user/me/favorite/:lessonId
+body: (empty)
+GET /lesson
+POST /lesson
+body:
+name
+GET /lesson/:id
+________________________________________________________________________________
+#Links
+________________________________________________________________________________
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Linkedin
 
-### Code Splitting
+# Trello/Kanban
+Link to your trello board or picture of your physical board
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Git
+The url to your repository and to your deployed project
 
-### Analyzing the Bundle Size
+# Client repository Link 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Server repository Link
 
-### Making a Progressive Web App
+# Deploy Link
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Slides Link
