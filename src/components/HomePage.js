@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from "react-dom";
+import { Link } from "react-router-dom";
 import "../App.css";
 
 class HomePage extends Component {
   render() {
   return (
     <div>
+      <div class="hm-1">
       <div className="home_content_area">
       <header class="bg">
       <div class="right flex">
@@ -27,8 +28,9 @@ class HomePage extends Component {
 
       </div>
       <div className="home_footer">
-
+        <p>test test</p>
       </div>
+   </div>
    </div>
   );
 }

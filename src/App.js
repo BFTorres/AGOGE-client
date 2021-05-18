@@ -52,7 +52,7 @@ class App extends Component {
         this.props.history.push('/')
       })
     //! CHECK
-    }).catch((err) => { 
+    }).catch(() => { 
       console.log('SignUp failed')
     });
   }
@@ -69,14 +69,13 @@ class App extends Component {
     .then((response) => {
       this.setState({
         user: response.data,
-        //error: null
+        error: null
       }, () => {
         this.props.history.push('/')
       })
-    }).catch((error) => {
-      console.log(error.data);
+    }).catch((errorObj) => {
       this.setState({
-        error: error.response.data,
+        error: errorObj.response.data,
       })
     });
   }
@@ -95,25 +94,33 @@ class App extends Component {
       })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    let name = event.target.name.value
+    let description = event.target.description.value
+
+    axios.post(`${config.API_URL}/api/create`, {
+      name: name,
+      description: description,
+      completed: false,
+    }, {withCredentials: true})
+      .then((response) => {
+          this.setState({
+            todos: [response.data, ...this.state.todos]
+          }, () => {
+            this.props.history.push('/')
+          })
+
+      })
+      .catch((err) => {
+        console.log('Create failed', err)
+      })
+  }
+
 
   //!_________________________________________________________________________
 
   componentDidMount() {
-    axios
-      .get(`${config.API_URL}/api/user`, { withCredentials: true })
-      .then((response) => {
-        this.setState({
-          user: response.data,
-          fetchingUser: false,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        // this.setState({
-        //   error: error.response.data,
-        //   fetchingUser: false,
-        // });
-      });
     axios
       .get(`${config.API_URL}/api/lessons`,  { withCredentials: true })
       .then((response) => {
@@ -128,7 +135,7 @@ class App extends Component {
       });
 
     axios
-      .get(`${config.API_URL}/api/users`, { withCredentials: true })
+      .get(`${config.API_URL}/api/user`, { withCredentials: true })
       .then((response) => {
         this.setState({
           userList: response.data,
@@ -151,8 +158,17 @@ class App extends Component {
     }*/
     return (
       <div>
+        <MyNav onLogout={this.handleLogout} user={this.state.loggedInUser}/>
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route path="/signup"  render={(routeProps) => {
+                return  <SignUp onSignUp={this.handleSignUp} {...routeProps}  />
+          }}
+          />
+          <Route path="/login"  render={(routeProps) => {
+                return  <LogIn onLogIn={this.handleLogIn} {...routeProps}  />
+          }}
+          />
          {/* <Route path="/signup" render={(routerProps) => {
             return <SignUp onSubmit={this.handleSignUp} {...routeProps}  />
           }}/>
