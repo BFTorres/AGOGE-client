@@ -1,4 +1,4 @@
-import axios from 'axios';
+//import axios from 'axios';
 import React from 'react';
 
 function SignUp(props){
@@ -14,13 +14,14 @@ function SignUp(props){
                 <label htmlFor="InputPassword">Password</label>
                 <input name="password" type="password" className="form-control" id="InputPassword" />
             </div>
-            
+            {/*} !insert usertype through DB
             <div clasName="form-group">
                 <label for="Student">Student</label>
                 <input type="radio" name="usertype" value="Student"/>
                 <label for="Teacher">Teacher</label>
                 <input type="radio" name="usertype" value="Teacher"/>
             </div>
+            */}
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>
     )

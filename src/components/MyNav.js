@@ -10,16 +10,16 @@ function MyNav(props) {
       <Navbar.Toggle  aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse  id="basic-navbar-nav">
         <Nav  className="mr-auto">
-          <Link to="/">
-          Homepage</Link>
-          <Link  style={{marginLeft: '10px'}}  to="/add-form">Student Portal</Link>
+          <Link to="/"> Homepage</Link>
+          <Link to="/lessons">Student Portal</Link>
+          <Link  to="/addlesson">Add Lesson</Link>
           {
-            user ? (
-              <button onClick={onLogout} >Logout</button>
+            props.user ? (
+              <button onClick={props.onLogout} type="button" class="btn btn-light">Logout</button>
             ) : (
               <>
-                <Link  style={{marginLeft: '10px'}}  to="/login">LogIn</Link>
-                <Link  style={{marginLeft: '10px'}}  to="/signup">SignUp</Link>
+                <Link to="/login">LogIn</Link>
+                <Link to="/signup">SignUp</Link>
               </>
             )
           }

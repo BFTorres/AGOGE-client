@@ -10,7 +10,7 @@ class HomePage extends Component {
       <div className="home_content_area">
       <header class="bg">
       <div class="right flex">
-        <Link to={`/lessons`}>
+        <Link to={`/Lessons`}>
           <button className="home_btn1">Student Portal</button>
         </Link>
         <Link to={`/AboutMe`}>

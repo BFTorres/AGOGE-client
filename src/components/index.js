@@ -5,4 +5,7 @@ export {default as Lessons} from './Auth/Lessons';
 export {default as LogIn} from './Auth/LogIn';
 export {default as MyNav} from './MyNav';
 export {default as SignUp} from './Auth/SignUp';
+export {default as AddLessons} from './Auth/AddLessons'
+export {default as NotFound} from './NotFound'
+
 

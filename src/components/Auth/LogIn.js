@@ -2,9 +2,9 @@ import React from 'react';
 
 function LogIn(props){
 
-    const { onLogIn, error } = props
+    const { onSubmit, error } = props
     return (
-        <form onSubmit={onLogIn}>
+        <form onSubmit={onSubmit}>
             <div className="form-group">
                 <label htmlFor="InputUsername">Username</label>
                 <input type="username" className="form-control" id="InputUsername" name="username" />
