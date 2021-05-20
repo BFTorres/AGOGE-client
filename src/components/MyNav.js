@@ -20,9 +20,7 @@ function MyNav(props) {
         <Nav  className="mr-auto">
           <Link to="/"> Homepage</Link>
           
-          <Link to="/lessons">Student Portal</Link>
-          
-          
+          <Link to="/lessons">Student Portal</Link>          
           {
             props.user?.usertype === "Teacher" &&
             

@@ -30,6 +30,7 @@ class App extends Component {
   state = {
     user: null,
     error: null,
+    students: [], //! asign1
     fetchingUser: true,
     lessons: []
     //lessons: [],
@@ -121,28 +122,6 @@ class App extends Component {
       })
   }
 
-
-  //!_________________________________________________________________________
-/*
-  handleAddLessons = (event, imageLesson) => {
-    event.preventDefault();
-    const {user} = this.state;
-    const {title, description} = event.target;
-    let newLessons = {
-      title: title.value,
-      description: description.value,
-      imgUrl: imageLesson
-      //!owner? like Jorge said
-      //!img!!!
-    };
-    axios
-      .post(`${config.API_URL}/api/addlessons`, newLessons)
-      .then((response) => {
-        this.props.history.push("/profile")
-      })
-      .catch((err) => {})
-  }
-  */
   handleEditLessons = (lessons) => {
     console.log(lessons)
     axios.patch(`${config.API_URL}/api/lessons/${lessons._id}`, {
@@ -189,6 +168,10 @@ class App extends Component {
       .catch((err) => {
         console.log('Delete failed', err)
       })
+
+  }
+
+  handleAllStudents = (students) => {
 
   }
 
@@ -248,7 +231,7 @@ class App extends Component {
           } }          
           />
           <Route exact path="/studentprofile" render={() => {
-            return <StudentProfile user={user} lessons={lessons} onDelete={this.handleDelete}/>;
+            return <StudentProfile user={user} lessons={lessons} />;
           } }          
           />
           <Route path="/signup"  render={(routeProps) => {

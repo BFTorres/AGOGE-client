@@ -19,6 +19,25 @@ class AddLessons extends Component {
         class="form-control" aria-label="With textarea"></textarea>
         </div>
 
+        {/*  //! asign students to lessons 
+            {
+            props.userId.map((eachUser) => {
+              return <Link key={eachUser._id} to={`/studentprofile/${user._id}`}>
+                <div >{eachUser.username}</div>
+                </Link>
+            }
+
+        */}
+
+        <div clasName="form-group">
+                <label for="userId">Student</label>
+                <input type="radio" name="userId" value="user"/>
+                
+        </div>
+
+
+
+
         <div class="input-group mb-3">
         <input id="choose-file" type="file" class="form-control" name="imageUrl" accept="image/jpeg, image/jpg" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" />
       

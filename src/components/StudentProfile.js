@@ -42,6 +42,8 @@ componentDidMount() {
 }
 */
 
+//! Show user lessons | todo: asign lessons 
+
 function StudentProfile(props) {
 
     const showLessons = () => {
