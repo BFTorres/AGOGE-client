@@ -8,6 +8,7 @@ import './App.css';
 import Button from '@material-ui/core/Button';
 import '@fontsource/roboto'; //! change it later, just to make materialui happy*/
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fontsource/roboto';
 
 import {
   HomePage, //page
@@ -19,16 +20,10 @@ import {
   MyNav,
   SignUp,
   AddLessons,
-  
+  NotAuthorized,
+  LessonsDetail,
+  EditLessons,
 } from './components';
-
-/*import {
-  HomePage,
-} from './components/pages';
-*/
-
-
-
 
 class App extends Component {
 
@@ -124,7 +119,7 @@ class App extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    let name = event.target.name.value
+    let title = event.target.title.value
     let description = event.target.description.value
     let image = event.target.imageUrl.files[0]
     let formData = new FormData()
@@ -134,9 +129,8 @@ class App extends Component {
       .then((response) => {
         //chaining promises
         return  axios.post(`${config.API_URL}/api/create`, {
-                    name: name,
+                    title: title,
                     description: description,
-                    completed: false,
                     image: response.data.image
                   }, {withCredentials: true})
       })
@@ -155,30 +149,35 @@ class App extends Component {
 
 
   //!_________________________________________________________________________
-
-  handleAddLessons = (event) => {
+/*
+  handleAddLessons = (event, imageLesson) => {
     event.preventDefault();
     const {user} = this.state;
     const {title, description} = event.target;
-    let newLesson = {
+    let newLessons = {
       title: title.value,
       description: description.value,
+      imgUrl: imageLesson
       //!owner? like Jorge said
       //!img!!!
-    }
-    
+    };
+    axios
+      .post(`${config.API_URL}/api/addlessons`, newLessons)
+      .then((response) => {
+        this.props.history.push("/profile")
+      })
+      .catch((err) => {})
   }
-
+  */
   handleEditLessons = (lessons) => {
     axios.patch(`${config.API_URL}/api/lessons/${lessons._id}`, {
-      name: lessons.name,
+      title: lessons.title,
       description: lessons.description,
-      completed: lessons.completed,
     }, {withCredentials: true})
       .then(() => {
           let newLessons = this.state.lessons.map((singleLessons) => {
               if (lessons._id === singleLessons._id) {
-                singleLessons.name  = lessons.name
+                singleLessons.title  = lessons.title
                 singleLessons.description = lessons.description
               }
               return singleLessons
@@ -195,6 +194,27 @@ class App extends Component {
         console.log('Edit failed', err)
       })
   }
+
+  handleDelete = (lessonsId) => {
+    
+    axios.delete(`${config.API_URL}/api/lessons/${lessonsId}`, {withCredentials: true})
+      .then(() => {
+         
+          let filteredLessons = this.state.todos.filter((lessons) => {
+            return lessons._id !== lessonsId
+          })
+
+          this.setState({
+            lessons: filteredLessons
+          }, () => {
+            this.props.history.push('/')
+          })
+      })
+      .catch((err) => {
+        console.log('Delete failed', err)
+      })
+
+  }
   
   //!Cloudinary
 
@@ -209,27 +229,33 @@ class App extends Component {
     return (
       <div>
         <MyNav onLogout={this.handleLogout} user={this.state.user}/>
-        <div className="pages">
+        {/*<div className="pages">*/}
         <Switch>
           <Route exact path="/" render={(routeProps) => {
             return <HomePage {...routeProps} />;
           } }/>
+          <Route path="/lessons" render={() => {
+            return <Lessons lessons={lessons} />;
+          } }          
+          />
           <Route path="/signup"  render={(routeProps) => {
-                return  <SignUp onSubmit={this.handleSignUp} {...routeProps}  />
+                return  <SignUp error={error} onSubmit={this.handleSignUp} {...routeProps}  />
           }}
           />
           <Route path="/login"  render={(routeProps) => {
                 return  <LogIn onSubmit={this.handleLogIn} {...routeProps}  />
           }}
           />
-          <Route path="/lessons" render={() => {
-            return <Lessons lessons={lessons} />;
-          } }          
-          />
           <Route path="/addlessons/" render={() => {
             return <AddLessons onAdd={this.handleSubmit} />;
           } }          
           />
+          <Route  path="/lessons/:lessonsId" render={(routeProps) => {
+                return <LessonsDetail user={user} onDelete={this.handleDelete} {...routeProps}/>
+            }} />
+          <Route  path="/lessons/:lessonsId/edit" render={(routeProps) => {
+                return <EditLessons onEdit={this.handleEditLessons} {...routeProps}/>
+            }} />  
           
          {/* <Route path="/signup" render={(routerProps) => {
             return <SignUp onSubmit={this.handleSignUp} {...routeProps}  />
@@ -255,7 +281,7 @@ class App extends Component {
           <Route component={NotFound} />
         </Switch>
         </div>
-      </div>
+      
     )
   }
 }

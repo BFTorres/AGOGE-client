@@ -1,13 +1,21 @@
 
-html, body {
-  height: 100%;
+html {
+  /*height: 100%;
   min-height: 100vh;
-  background-color: #22262a;
+  */
+  scroll-behavior: smooth;
+}
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+  background-color: #03001a;
+  background-repeat: no-repeat;
 }
 
 .App {
   text-align: center;
-  background-color: #22262a;
+  background-color: black;
   letter-spacing: 0.1em;
   ;
 }
@@ -24,7 +32,6 @@ html, body {
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -48,29 +55,59 @@ html, body {
 }
 
 .pages {
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   min-height: 100vh;
   height: 100%;
-  background-color: #22262a;
+  background-color: #fff;
+  color: rgb(1, 35, 146)
 }
 
-.lessons-page {
-  color: white;
+.logo {
+  margin-right: 20px;
+  height: 40px;
 }
 
 /*dropdown menu*/
+.navbar {
+  background-color: #fff;
+  padding: 0 10px !important;
+}
+
 .navbar-light .navbar-toggler {
-  border-color: none !important;
+  border-color: transparent !important; 
+}
+
+.navbar-toggler:focus {
+  box-shadow: none !important; 
 }
 
 .navbar-toggler-icon {
-  width: 1em;
-  height: 1em;
+  width: 1em !important;
+  height: 1em !important;
+  background-image: url('./images/36-365828_navbar-toggle-icon-menu-hamburger-png-white.png');
+}
+/*dropdown content*/
+.mr-auto.navbar-nav {
+  align-items: flex-end;
+}
+
+a{
+  color: #000000 !important;
+  text-decoration: none !important;
+ 
+}
+
+.bg-dark {
+  background-color: #fff !important;
+}
+nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+  background-color: #fff !important;
 }
 
 .mr-auto {
-  background-color: #22262a;
+  background-color: #fff;
 }
 
 .home_footer {
@@ -79,12 +116,94 @@ html, body {
   vertical-align: baseline;
 }
 
-.hm-1 {
-  background-color: #22262a;
+/*.hm-1 {
+  background-color: #fff;
   text-align: center;
-  min-height: 50vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   width: auto;
+  padding-top: 30px;
+}
+*/
+/*input fields*/
+
+.input-group-text {
+  align-items: flex-start !important;
 }
 
+div#input-lesson {
+  align-items: center !important;
+}
+#input-lesson span.input-group-text {
+  padding-right: 41px;
+}
+#input-lesson textarea.form-control {
+  height: 30px;
+}
+div#input-lesson {
+  align-items: center !important;
+  margin-bottom: 15px;
+}
+
+#input-description textarea.form-control {
+  height: 150px;
+}
+div#input-description {
+  margin-bottom: 15px;
+}
+
+#choose-file span.input-group-text {
+  padding-right: 41px;
+}
+/*buttons*/
+
+button, button#button-addon1 {
+  float: right;
+  background-color: forestgreen;
+  color: white;
+  border: none;
+}
+
+button#button-addon1 {
+  float: right;
+}
+
+.home_btn1, .home_btn2, .home_btn3 {
+  margin-bottom: 10px;
+  padding: 8px 20px;
+  border-radius: 5px;
+}
+
+.home_btn2{
+  margin-left: 10px;
+}
+
+/*homepage*/
+#home.bg-img{
+  background-image: url(/src/images/kid.jpg);
+  background-repeat: no-repeat;
+  height: 93vh;
+  background-size: cover;
+}
+
+h1.main-title.pr-30 {
+  margin-top: 30px;
+}
+h1.main-title.pr-30 {
+  margin-bottom: 30px;
+  color: #fff;
+}
+/*helper classes*/
+.pr-30{
+  padding-right: 30px;
+}
+
+/*flex*/
+header#home {
+  display: flex;
+  flex-direction: column;
+}
+h1.main-title {
+  align-self: flex-end;
+}
