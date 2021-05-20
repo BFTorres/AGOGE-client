@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NotAuthorized from './NotAuthorized';
+
 
 class AddLessons extends Component {
 

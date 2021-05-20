@@ -20,8 +20,8 @@ import {
   MyNav,
   SignUp,
   AddLessons,
-  NotAuthorized,
   LessonsDetail,
+  StudentProfile,
   EditLessons,
 } from './components';
 
@@ -35,33 +35,7 @@ class App extends Component {
     //lessons: [],
   }
 
-  componentDidMount() {
-    axios
-      .get(`${config.API_URL}/api/lessons`,  { withCredentials: true })
-      .then((response) => {
-        this.setState({
-          lessons: response.data,
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          error: err.data,
-        });
-      });
-
-    axios
-      .get(`${config.API_URL}/api/user`, { withCredentials: true })
-      .then((response) => {
-        this.setState({
-          user: response.data,
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          error: err.data,
-        });
-      });
-    }
+  
   
   handleSignUp = (e) => {
     e.preventDefault()
@@ -170,6 +144,7 @@ class App extends Component {
   }
   */
   handleEditLessons = (lessons) => {
+    console.log(lessons)
     axios.patch(`${config.API_URL}/api/lessons/${lessons._id}`, {
       title: lessons.title,
       description: lessons.description,
@@ -185,7 +160,8 @@ class App extends Component {
           this.setState({
             lessons: newLessons
           }, () => {
-            this.props.history.push('/lessons')
+            this.props.history.push('/')
+            //this.props.history.push(`/lessons/${lessons._id}`)
           })
 
           
@@ -200,7 +176,7 @@ class App extends Component {
     axios.delete(`${config.API_URL}/api/lessons/${lessonsId}`, {withCredentials: true})
       .then(() => {
          
-          let filteredLessons = this.state.todos.filter((lessons) => {
+          let filteredLessons = this.state.lessons.filter((lessons) => {
             return lessons._id !== lessonsId
           })
 
@@ -215,15 +191,48 @@ class App extends Component {
       })
 
   }
+
+  componentDidMount() {
+
+      
+    axios
+      .get(`${config.API_URL}/api/lessons`,  { withCredentials: true })
+      .then((response) => {
+        this.setState({
+          lessons: response.data,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          error: err.data,
+        });
+      });
+
+    axios
+      .get(`${config.API_URL}/api/user`, { withCredentials: true })
+      .then((response) => {
+        this.setState({
+          user: response.data,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          error: err.data,
+        });
+      });
+      
+    }
   
   //!Cloudinary
 
   render() {
-    //const {user, error, fetchingUser} = this.state
-  /*  if(fetchingUser){
+    /*
+    const {lessons, error, user, fetchingUser} = this.state
+    if(fetchingUser){
   //! REPLACE THIS
       return <p>Loading...</p>
-    }*/
+    }
+    */
     const {lessons, error, user} = this.state
 
     return (
@@ -234,8 +243,12 @@ class App extends Component {
           <Route exact path="/" render={(routeProps) => {
             return <HomePage {...routeProps} />;
           } }/>
-          <Route path="/lessons" render={() => {
-            return <Lessons lessons={lessons} />;
+          <Route exact path="/lessons" render={() => {
+            return <Lessons user={user} lessons={lessons}/>;
+          } }          
+          />
+          <Route exact path="/studentprofile" render={() => {
+            return <StudentProfile user={user} lessons={lessons} onDelete={this.handleDelete}/>;
           } }          
           />
           <Route path="/signup"  render={(routeProps) => {
@@ -250,12 +263,13 @@ class App extends Component {
             return <AddLessons onAdd={this.handleSubmit} />;
           } }          
           />
-          <Route  path="/lessons/:lessonsId" render={(routeProps) => {
+          <Route  path="/lessons/:lessonsId/edit" render={(routeProps) => {
+                return <EditLessons user={user} onEdit={this.handleEditLessons} onDelete={this.handleDelete} {...routeProps}/>
+            }} /> 
+          <Route  exact path="/lessons/:lessonsId" render={(routeProps) => {
                 return <LessonsDetail user={user} onDelete={this.handleDelete} {...routeProps}/>
             }} />
-          <Route  path="/lessons/:lessonsId/edit" render={(routeProps) => {
-                return <EditLessons onEdit={this.handleEditLessons} {...routeProps}/>
-            }} />  
+           
           
          {/* <Route path="/signup" render={(routerProps) => {
             return <SignUp onSubmit={this.handleSignUp} {...routeProps}  />

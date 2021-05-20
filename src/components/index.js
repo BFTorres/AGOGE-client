@@ -7,10 +7,10 @@ export {default as MyNav} from './MyNav';
 export {default as SignUp} from './Auth/SignUp';
 export {default as AddLessons} from './Auth/AddLessons'
 export {default as NotFound} from './NotFound'
-export {default as NotAuthorized} from './Auth/NotAuthorized'
 export {default as LessonsDetail} from './LessonsDetail'
 export {default as LottieControl} from './LottieControl'
 export {default as EditLessons} from './EditLessons'
+export {default as StudentProfile} from './StudentProfile'
 
 
 

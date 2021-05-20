@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 function Lessons(props) {
 
     const showLessons = () => {
+      console.log(props.user)
     
     
         /*
@@ -34,6 +35,9 @@ function Lessons(props) {
                <Link to={`/lessons/${lessons._id}/edit`}>
                 <button>Edit</button>
                 </Link>
+                }
+                {
+                  
                 }
                 </div>
               </div>

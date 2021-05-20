@@ -29,6 +29,11 @@ function MyNav(props) {
           <Link  to="/addlessons">Add Lesson</Link>
           }
           {
+            props.user?.usertype === "Student" &&
+          
+          <Link to="/studentprofile">Student Profile</Link>
+          }
+          {
             props.user ? (
               <Link onClick={props.onLogout} type="" >Logout</Link>
             ) : (
