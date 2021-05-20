@@ -53,7 +53,7 @@ function StudentProfile(props) {
         
       return props.lessons.userId.map(lessons => {
         return (
-          <div>
+          <div >
             <h4>Lesson</h4> 
               
             <div key={lessons._id}>

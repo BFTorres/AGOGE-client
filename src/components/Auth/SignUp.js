@@ -5,7 +5,8 @@ function SignUp(props){
 
     const { onSubmit } = props
     return (
-        <form onSubmit={onSubmit}>
+        <form  className="container mt-10" onSubmit={onSubmit}>
+        <h2>Sign Up</h2>
             <div className="form-group">
                 <label htmlFor="InputUsername">Username</label>
                 <input type="text" className="form-control" id="InputUsername" name="username" />
@@ -22,7 +23,7 @@ function SignUp(props){
                 <input type="radio" name="usertype" value="Teacher"/>
             </div>
             */}
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="home_btn3 mt-5p">Submit</button>
         </form>
     )
 }

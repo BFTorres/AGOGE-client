@@ -1,8 +1,5 @@
 
 html {
-  /*height: 100%;
-  min-height: 100vh;
-  */
   scroll-behavior: smooth;
 }
 body {
@@ -14,7 +11,7 @@ body {
 }
 
 .App {
-  text-align: center;
+  
   background-color: black;
   letter-spacing: 0.1em;
   ;
@@ -24,6 +21,8 @@ body {
   height: 40vmin;
   pointer-events: none;
 }
+
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -137,7 +136,15 @@ div#input-lesson {
 }
 #input-lesson span.input-group-text {
   padding-right: 41px;
+  background-color: #274156;
+    color: #fff;
 }
+
+span.input-group-text{
+  background-color: #274156;
+  color: #fff;
+}
+
 #input-lesson textarea.form-control {
   height: 30px;
 }
@@ -160,7 +167,7 @@ div#input-description {
 
 button, button#button-addon1 {
   float: right;
-  background-color: forestgreen;
+  background-color: #26a96c;
   color: white;
   border: none;
 }
@@ -169,14 +176,31 @@ button#button-addon1 {
   float: right;
 }
 
-.home_btn1, .home_btn2, .home_btn3 {
+.home_btn1, .home_btn2, .home_btn3, .btn4 {
   margin-bottom: 10px;
   padding: 8px 20px;
   border-radius: 5px;
 }
 
+.home_btn1{
+  background-color: #ab81cd;
+}
+
 .home_btn2{
   margin-left: 10px;
+  background-color: #1c6e8c;
+}
+
+#startbtn .home_btn2{
+  background-color: #94778b;
+}
+.home_btn3 {
+  background-color: #26a96c
+}
+
+.btn4{
+  margin-right: 10px;
+  background-color: #cc2936;
 }
 
 /*homepage*/
@@ -186,6 +210,14 @@ button#button-addon1 {
   height: 93vh;
   background-size: cover;
 }
+
+.travels-img {
+  background-repeat: no-repeat;
+  height: 93vh;
+  background-size: cover;
+}
+
+
 
 h1.main-title.pr-30 {
   margin-top: 30px;
@@ -199,6 +231,13 @@ h1.main-title.pr-30 {
   padding-right: 30px;
 }
 
+.mt-10{
+  margin-top: 10%;
+}
+.mt-5p{
+  margin-top: 5px;
+}
+
 /*flex*/
 header#home {
   display: flex;
@@ -206,4 +245,57 @@ header#home {
 }
 h1.main-title {
   align-self: flex-end;
+}
+
+h2{
+  border-bottom: 2px solid  #1c6e8c;
+  color: #1c6e8c !important;
+}
+
+.details{
+  border-bottom: none !important;
+}
+
+h4 {
+  background-color: #254156;
+  border-radius: 5px;
+  color: #ffff;
+  padding: 5px;
+  margin-top: 3% !important;
+  margin-bottom: 0px !important;
+}
+
+h6{
+  padding: 5px;
+}
+
+.bg-color{
+  background-color: #fff;
+  border-radius: 0 0 5px 5px;
+  border: 1px solid #ced4da;
+
+}
+.edit-link{
+  background-color: #274156;
+    margin-top: 5px;
+    color: #ab81cd;
+}
+
+.SP-img{
+  margin-top: 10%;
+  margin-bottom: 20px;
+  width: 100% !important;
+}
+
+.flex-center{
+  display: flex;
+  justify-content: center;;
+}
+
+body{
+  background-color: #fbfcff !important;
+}
+
+.lessons{
+  border-radius: 5px 5px 0 0;
 }

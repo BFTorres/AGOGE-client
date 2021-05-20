@@ -15,35 +15,37 @@ function Lessons(props) {
         */
       return props.lessons.map(lessons => {
         return (
-          <div>
-            <h4>Lesson</h4> 
-              
-            <div key={lessons._id}>
-              <div class="SP-img">
-
-
-            
-
-              <img  src={lessons.image} alt='image' /> 
-              <div>
-                <Link to={`/lessons/${lessons._id}`}><h2>{lessons.title}</h2></Link>
-                
-                <div class="lesson-decription">
-                <p>{lessons.description}</p>
-                {
+          <div className="container">
+                 {
                 props.user?.usertype === "Teacher" &&
                <Link to={`/lessons/${lessons._id}/edit`}>
-                <button>Edit</button>
+                <button className="edit-link">Edit</button>
                 </Link>
                 }
-                {
-                  
-                }
+            <h4 className="lessons">Lesson</h4> 
+          
+              
+            <div className="bg-color" key={lessons._id}>
+
+            <Link to={`/lessons/${lessons._id}`}><h6>{lessons.title}</h6></Link>
+              
+
+              
+              <div>
+
+               
+                {/*
+                <div class="lesson-decription">
+                <p>{lessons.description}</p>
+                */}
+               
+                
+                
                 </div>
               </div>
               </div>
-            </div>  
-        </div>   
+            
+          
         );
     });
   };

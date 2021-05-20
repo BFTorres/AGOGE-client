@@ -23,7 +23,7 @@ class HomePage extends Component {
         <div className="row">
         <div className="col s12">
         <Link to={`/AboutMe`}>
-          <button className="home_btn2">About Me</button>
+          <button id="startbtn" className="home_btn2">About Me</button>
         </Link>
         <Link to={`/Travels`}>
           <button className="home_btn2">Travels</button>

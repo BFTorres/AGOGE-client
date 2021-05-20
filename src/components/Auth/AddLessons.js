@@ -5,7 +5,8 @@ class AddLessons extends Component {
 
   render() {
     return (
-      <form onSubmit={this.props.onAdd}>
+      <form className="container mt-10" onSubmit={this.props.onAdd}>
+      <h2>Add Lesson</h2>
 
         <div id="input-lesson" class="input-group">
         <span class="input-group-text">Enter Lesson</span>
@@ -28,12 +29,6 @@ class AddLessons extends Component {
             }
 
         */}
-
-        <div clasName="form-group">
-                <label for="userId">Student</label>
-                <input type="radio" name="userId" value="user"/>
-                
-        </div>
 
 
 

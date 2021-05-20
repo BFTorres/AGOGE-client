@@ -171,9 +171,19 @@ class App extends Component {
 
   }
 
+  //! asign2
+  /*
   handleAllStudents = (students) => {
-
+      axios.get(`${config.API_URL}/api/allstudents`, {withCredentials: true})
+      .then((response) => {
+        this.setState({
+          students: response.data
+        })
+      })
+      .catch((err) => {
+      });
   }
+  */
 
   componentDidMount() {
 
@@ -203,6 +213,23 @@ class App extends Component {
           error: err.data,
         });
       });
+
+      /*
+       //! asign4
+       axios
+       .get(`${config.API_URL}/api/allstudents`,  { withCredentials: true })
+       .then((response) => {
+         this.setState({
+           students: response.data,
+         });
+       })
+       .catch((err) => {
+         this.setState({
+           error: err.data,
+         });
+       });
+       */
+
       
     }
   
@@ -225,6 +252,12 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={(routeProps) => {
             return <HomePage {...routeProps} />;
+          } }/>
+          <Route exact path="/travels" render={(routeProps) => {
+            return <Travels {...routeProps} />;
+          } }/>
+          <Route exact path="/aboutme" render={(routeProps) => {
+            return <AboutMe {...routeProps} />;
           } }/>
           <Route exact path="/lessons" render={() => {
             return <Lessons user={user} lessons={lessons}/>;
