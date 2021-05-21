@@ -3,10 +3,6 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import config from './config';
 import './App.css';
-//Material-UI
-/*import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
-import Button from '@material-ui/core/Button';
-import '@fontsource/roboto'; //! change it later, just to make materialui happy*/
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fontsource/roboto';
 
@@ -21,7 +17,6 @@ import {
   SignUp,
   AddLessons,
   LessonsDetail,
-  StudentProfile,
   EditLessons,
 } from './components';
 
@@ -30,12 +25,11 @@ class App extends Component {
   state = {
     user: null,
     error: null,
-    students: [], //! asign1
     fetchingUser: true,
-    lessons: []
-    //lessons: [],
+    lessons: [],
   }
 
+  
   
   
   handleSignUp = (e) => {
@@ -171,20 +165,6 @@ class App extends Component {
 
   }
 
-  //! asign2
-  /*
-  handleAllStudents = (students) => {
-      axios.get(`${config.API_URL}/api/allstudents`, {withCredentials: true})
-      .then((response) => {
-        this.setState({
-          students: response.data
-        })
-      })
-      .catch((err) => {
-      });
-  }
-  */
-
   componentDidMount() {
 
       
@@ -212,28 +192,7 @@ class App extends Component {
         this.setState({
           error: err.data,
         });
-      });
-
-      /*
-       //! asign4
-       axios
-       .get(`${config.API_URL}/api/allstudents`,  { withCredentials: true })
-       .then((response) => {
-         this.setState({
-           students: response.data,
-         });
-       })
-       .catch((err) => {
-         this.setState({
-           error: err.data,
-         });
-       });
-       */
-
-      
-    }
-  
-  //!Cloudinary
+      })}
 
   render() {
     /*
@@ -253,20 +212,16 @@ class App extends Component {
           <Route exact path="/" render={(routeProps) => {
             return <HomePage {...routeProps} />;
           } }/>
+          <Route exact path="/lessons" render={() => {
+            return <Lessons user={user} lessons={lessons}/>;
+          } }          
+          />
           <Route exact path="/travels" render={(routeProps) => {
             return <Travels {...routeProps} />;
           } }/>
           <Route exact path="/aboutme" render={(routeProps) => {
             return <AboutMe {...routeProps} />;
-          } }/>
-          <Route exact path="/lessons" render={() => {
-            return <Lessons user={user} lessons={lessons}/>;
-          } }          
-          />
-          <Route exact path="/studentprofile" render={() => {
-            return <StudentProfile user={user} lessons={lessons} />;
-          } }          
-          />
+          } }/>  
           <Route path="/signup"  render={(routeProps) => {
                 return  <SignUp error={error} onSubmit={this.handleSignUp} {...routeProps}  />
           }}
@@ -314,7 +269,7 @@ class App extends Component {
       
     )
   }
-}
 
+}
 
 export default withRouter(App);

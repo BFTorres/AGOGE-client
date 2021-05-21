@@ -1,18 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Lessons(props) {
 
     const showLessons = () => {
-      console.log(props.user)
-    
-    
-        /*
-            <div className="lessons-page">
-        <h1>Student Portal</h1>
-          <h4>Lessons</h4>
-          </div>
-        */
+      
+  console.log(props?.lessons)
       return props.lessons.map(lessons => {
         return (
           <div className="container">
@@ -32,12 +25,6 @@ function Lessons(props) {
 
               
               <div>
-
-               
-                {/*
-                <div class="lesson-decription">
-                <p>{lessons.description}</p>
-                */}
                
                 
                 

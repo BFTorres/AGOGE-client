@@ -207,7 +207,7 @@ button#button-addon1 {
 #home.bg-img{
   background-image: url(/src/images/kid.jpg);
   background-repeat: no-repeat;
-  height: 93vh;
+  height: 100vh;
   background-size: cover;
 }
 

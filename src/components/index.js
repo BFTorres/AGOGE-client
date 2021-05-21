@@ -10,7 +10,7 @@ export {default as NotFound} from './NotFound'
 export {default as LessonsDetail} from './LessonsDetail'
 export {default as LottieControl} from './LottieControl'
 export {default as EditLessons} from './EditLessons'
-export {default as StudentProfile} from './StudentProfile'
+
 
 
 

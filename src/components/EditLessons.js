@@ -13,8 +13,8 @@ class EditLessons extends Component {
     let lessonsId = this.props.match.params.lessonsId
     console.log('here ',)
     axios.get(`${config.API_URL}/api/lessons/${lessonsId}`, {withCredentials: true})
-      .then((response) => {
-        this.setState({ lessons: response.data })
+      .then((lessons) => {
+        this.setState({ lessons: lessons.data })
       })
       .catch(() => {
         console.log('Detail fecth failed')

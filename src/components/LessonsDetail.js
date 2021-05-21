@@ -8,7 +8,7 @@ import {Link, Redirect} from 'react-router-dom'
   state = {
     lessons: {},
     //! asign4
-    students: {},
+    //students: {},
   }
   //! asign
   /*
@@ -24,9 +24,9 @@ import {Link, Redirect} from 'react-router-dom'
  
    let lessonsId = this.props.match.params.lessonsId
     axios.get(`${config.API_URL}/api/lessons/${lessonsId}`, {withCredentials: true})
-      .then((response) => {
+      .then((lessons) => {
         this.setState({ 
-          lessons: response.data 
+          lessons: lessons.data 
         })
       })
       .catch(() => {
@@ -88,7 +88,7 @@ import {Link, Redirect} from 'react-router-dom'
 
   render() {
     const {lessons} = this.state
-    const {onDelete, user, students} = this.props //! asign5
+    const {onDelete, user} = this.props 
     console.log(this.props)
 
     if(!user){
