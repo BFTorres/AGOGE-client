@@ -2,6 +2,7 @@ import React from  'react'
 import {Navbar, Nav} from  'react-bootstrap'
 import {Link} from  'react-router-dom'
 import logo from '../images/logo2.png'
+import '../App.css';
 
 
 function MyNav(props) {
