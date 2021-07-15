@@ -10,7 +10,7 @@ function MyNav(props) {
   //usertype visibility!!!
 
   return (
-    <Navbar className="bg-light" bg="light" expand="xxxl">
+    <Navbar className="bg-light" bg="light" expand="xxxxl">
       <Link to="/">
         <img className="logo" src={logo} alt="logo" />
       </Link>
