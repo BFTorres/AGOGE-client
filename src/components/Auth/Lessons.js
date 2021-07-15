@@ -1,48 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Lessons(props) {
+  const showLessons = () => {
+    console.log(props?.lessons);
+    return props.lessons.map((lessons) => {
+      return (
+        <div className="container">
+          {props.user?.usertype === 'Teacher' && (
+            <Link to={`/lessons/${lessons._id}/edit`}>
+              <button className="edit-link">Edit</button>
+            </Link>
+          )}
+          <h4 className="lessons">Lesson</h4>
 
-    const showLessons = () => {
-      
-  console.log(props?.lessons)
-      return props.lessons.map(lessons => {
-        return (
-          <div className="container">
-                 {
-                props.user?.usertype === "Teacher" &&
-               <Link to={`/lessons/${lessons._id}/edit`}>
-                <button className="edit-link">Edit</button>
-                </Link>
-                }
-            <h4 className="lessons">Lesson</h4> 
-          
-              
-            <div className="bg-color" key={lessons._id}>
+          <div className="bg-color" key={lessons._id}>
+            <Link to={`/lessons/${lessons._id}`}>
+              <h6>{lessons.title}</h6>
+            </Link>
 
-            <Link to={`/lessons/${lessons._id}`}><h6>{lessons.title}</h6></Link>
-              
-
-              
-              <div>
-               
-                
-                
-                </div>
-              </div>
-              </div>
-            
-          
-        );
+            <div></div>
+          </div>
+        </div>
+      );
     });
   };
   return <div>{showLessons()}</div>;
-  }
-
-
-
-
-
+}
 
 /*
 
@@ -90,6 +74,5 @@ const {lessons} = this.props
 }
 }
 */
-
 
 export default Lessons;

@@ -7,10 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fontsource/roboto';
 
 import {
-  HomePage, //page
+  HomePage, //landing page
   Lessons, //student portal
-  AboutMe, //page
-  Travels, //page
   LogIn,
   NotFound,
   MyNav,
@@ -21,155 +19,174 @@ import {
 } from './components';
 
 class App extends Component {
-
   state = {
     user: null,
     error: null,
     fetchingUser: true,
     lessons: [],
-  }
+  };
 
-  
-  
-  
   handleSignUp = (e) => {
-    e.preventDefault()
-    const {username, password} = e.target
-    let newUser = {
-      username: username.value, 
-      password: password.value
-    }
-
-  axios.post(`${config.API_URL}/api/signup`, newUser, {withCredentials: true})
-    .then((response) => {
-      this.setState({
-        user: response.data
-      }, () => {
-        this.props.history.push('/')
-      })
-    //! CHECK
-    }).catch(() => { 
-      console.log('SignUp failed')
-    });
-  }
-
-  handleLogIn = (e) => {
-    e.preventDefault()
-    const {username, password} = e.target
+    e.preventDefault();
+    const { username, password } = e.target;
     let newUser = {
       username: username.value,
-      password: password.value
-    }
+      password: password.value,
+    };
 
-  axios.post(`${config.API_URL}/api/login`, newUser, {withCredentials: true})
-    .then((response) => {
-      this.setState({
-        user: response.data,
-        error: null
-      }, () => {
-        this.props.history.push('/lessons')
+    axios
+      .post(`${config.API_URL}/api/signup`, newUser, { withCredentials: true })
+      .then((response) => {
+        this.setState(
+          {
+            user: response.data,
+          },
+          () => {
+            this.props.history.push('/');
+          },
+        );
+        //! CHECK
       })
-    }).catch((err) => {
-      console.log('Something went wrong', err)
-  })
-}
+      .catch(() => {
+        console.log('SignUp failed');
+      });
+  };
+
+  handleLogIn = (e) => {
+    e.preventDefault();
+    const { username, password } = e.target;
+    let newUser = {
+      username: username.value,
+      password: password.value,
+    };
+
+    axios
+      .post(`${config.API_URL}/api/login`, newUser, { withCredentials: true })
+      .then((response) => {
+        this.setState(
+          {
+            user: response.data,
+            error: null,
+          },
+          () => {
+            this.props.history.push('/lessons');
+          },
+        );
+      })
+      .catch((err) => {
+        console.log('Something went wrong', err);
+      });
+  };
 
   handleLogout = () => {
-    axios.post(`${config.API_URL}/api/logout`, {}, {withCredentials: true})
-        .then(() => {
-          this.setState({
-            user: null
-          }, () => {
-            this.props.history.push('/')
-          })
-      })
-    
-     }
+    axios.post(`${config.API_URL}/api/logout`, {}, { withCredentials: true }).then(() => {
+      this.setState(
+        {
+          user: null,
+        },
+        () => {
+          this.props.history.push('/');
+        },
+      );
+    });
+  };
 
   handleSubmit = (event) => {
-    event.preventDefault()
-    let title = event.target.title.value
-    let description = event.target.description.value
-    let image = event.target.imageUrl.files[0]
-    let formData = new FormData()
-    formData.append( 'imageUrl' ,  image   )
+    event.preventDefault();
+    let title = event.target.title.value;
+    let description = event.target.description.value;
+    let image = event.target.imageUrl.files[0];
+    let formData = new FormData();
+    formData.append('imageUrl', image);
 
-    axios.post(`${config.API_URL}/api/upload`, formData)
+    axios
+      .post(`${config.API_URL}/api/upload`, formData)
       .then((response) => {
         //chaining promises
-        return  axios.post(`${config.API_URL}/api/create`, {
-                    title: title,
-                    description: description,
-                    image: response.data.image
-                  }, {withCredentials: true})
+        return axios.post(
+          `${config.API_URL}/api/create`,
+          {
+            title: title,
+            description: description,
+            image: response.data.image,
+          },
+          { withCredentials: true },
+        );
       })
       .then((response) => {
-          this.setState({
-            lessons: [response.data, ...this.state.lessons]
-          }, () => {
-            this.props.history.push('/')
-          })
-
+        this.setState(
+          {
+            lessons: [response.data, ...this.state.lessons],
+          },
+          () => {
+            this.props.history.push('/');
+          },
+        );
       })
       .catch((err) => {
-        console.log('Create failed', err)
-      })
-  }
+        console.log('Create failed', err);
+      });
+  };
 
   handleEditLessons = (lessons) => {
-    console.log(lessons)
-    axios.patch(`${config.API_URL}/api/lessons/${lessons._id}`, {
-      title: lessons.title,
-      description: lessons.description,
-    }, {withCredentials: true})
+    console.log(lessons);
+    axios
+      .patch(
+        `${config.API_URL}/api/lessons/${lessons._id}`,
+        {
+          title: lessons.title,
+          description: lessons.description,
+        },
+        { withCredentials: true },
+      )
       .then(() => {
-          let newLessons = this.state.lessons.map((singleLessons) => {
-              if (lessons._id === singleLessons._id) {
-                singleLessons.title  = lessons.title
-                singleLessons.description = lessons.description
-              }
-              return singleLessons
-          })
-          this.setState({
-            lessons: newLessons
-          }, () => {
-            this.props.history.push('/')
+        let newLessons = this.state.lessons.map((singleLessons) => {
+          if (lessons._id === singleLessons._id) {
+            singleLessons.title = lessons.title;
+            singleLessons.description = lessons.description;
+          }
+          return singleLessons;
+        });
+        this.setState(
+          {
+            lessons: newLessons,
+          },
+          () => {
+            this.props.history.push('/');
             //this.props.history.push(`/lessons/${lessons._id}`)
-          })
-
-          
+          },
+        );
       })
       .catch((err) => {
-        console.log('Edit failed', err)
-      })
-  }
+        console.log('Edit failed', err);
+      });
+  };
 
   handleDelete = (lessonsId) => {
-    
-    axios.delete(`${config.API_URL}/api/lessons/${lessonsId}`, {withCredentials: true})
+    axios
+      .delete(`${config.API_URL}/api/lessons/${lessonsId}`, { withCredentials: true })
       .then(() => {
-         
-          let filteredLessons = this.state.lessons.filter((lessons) => {
-            return lessons._id !== lessonsId
-          })
+        let filteredLessons = this.state.lessons.filter((lessons) => {
+          return lessons._id !== lessonsId;
+        });
 
-          this.setState({
-            lessons: filteredLessons
-          }, () => {
-            this.props.history.push('/')
-          })
+        this.setState(
+          {
+            lessons: filteredLessons,
+          },
+          () => {
+            this.props.history.push('/');
+          },
+        );
       })
       .catch((err) => {
-        console.log('Delete failed', err)
-      })
-
-  }
+        console.log('Delete failed', err);
+      });
+  };
 
   componentDidMount() {
-
-      
     axios
-      .get(`${config.API_URL}/api/lessons`,  { withCredentials: true })
+      .get(`${config.API_URL}/api/lessons`, { withCredentials: true })
       .then((response) => {
         this.setState({
           lessons: response.data,
@@ -192,7 +209,8 @@ class App extends Component {
         this.setState({
           error: err.data,
         });
-      })}
+      });
+  }
 
   render() {
     /*
@@ -202,47 +220,73 @@ class App extends Component {
       return <p>Loading...</p>
     }
     */
-    const {lessons, error, user} = this.state
+    const { lessons, error, user } = this.state;
 
     return (
       <div>
-        <MyNav onLogout={this.handleLogout} user={this.state.user}/>
+        <MyNav onLogout={this.handleLogout} user={this.state.user} />
         {/*<div className="pages">*/}
         <Switch>
-          <Route exact path="/" render={(routeProps) => {
-            return <HomePage {...routeProps} />;
-          } }/>
-          <Route exact path="/lessons" render={() => {
-            return <Lessons user={user} lessons={lessons}/>;
-          } }          
+          <Route
+            exact
+            path="/"
+            render={(routeProps) => {
+              return <HomePage {...routeProps} />;
+            }}
           />
-          <Route exact path="/travels" render={(routeProps) => {
+          <Route
+            exact
+            path="/lessons"
+            render={() => {
+              return <Lessons user={user} lessons={lessons} />;
+            }}
+          />
+          {/* <Route exact path="/travels" render={(routeProps) => {
             return <Travels {...routeProps} />;
-          } }/>
-          <Route exact path="/aboutme" render={(routeProps) => {
+          } }/> */}
+          {/* <Route exact path="/aboutme" render={(routeProps) => {
             return <AboutMe {...routeProps} />;
-          } }/>  
-          <Route path="/signup"  render={(routeProps) => {
-                return  <SignUp error={error} onSubmit={this.handleSignUp} {...routeProps}  />
-          }}
+          } }/>   */}
+          <Route
+            path="/signup"
+            render={(routeProps) => {
+              return <SignUp error={error} onSubmit={this.handleSignUp} {...routeProps} />;
+            }}
           />
-          <Route path="/login"  render={(routeProps) => {
-                return  <LogIn onSubmit={this.handleLogIn} {...routeProps}  />
-          }}
+          <Route
+            path="/login"
+            render={(routeProps) => {
+              return <LogIn onSubmit={this.handleLogIn} {...routeProps} />;
+            }}
           />
-          <Route path="/addlessons/" render={() => {
-            return <AddLessons onAdd={this.handleSubmit} />;
-          } }          
+          <Route
+            path="/addlessons/"
+            render={() => {
+              return <AddLessons onAdd={this.handleSubmit} />;
+            }}
           />
-          <Route  path="/lessons/:lessonsId/edit" render={(routeProps) => {
-                return <EditLessons user={user} onEdit={this.handleEditLessons} onDelete={this.handleDelete} {...routeProps}/>
-            }} /> 
-          <Route  exact path="/lessons/:lessonsId" render={(routeProps) => {
-                return <LessonsDetail user={user} onDelete={this.handleDelete} {...routeProps}/>
-            }} />
-           
-          
-         {/* <Route path="/signup" render={(routerProps) => {
+          <Route
+            path="/lessons/:lessonsId/edit"
+            render={(routeProps) => {
+              return (
+                <EditLessons
+                  user={user}
+                  onEdit={this.handleEditLessons}
+                  onDelete={this.handleDelete}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/lessons/:lessonsId"
+            render={(routeProps) => {
+              return <LessonsDetail user={user} onDelete={this.handleDelete} {...routeProps} />;
+            }}
+          />
+
+          {/* <Route path="/signup" render={(routerProps) => {
             return <SignUp onSubmit={this.handleSignUp} {...routeProps}  />
           }}/>
           <Route path="/login"  render={(routeProps) => {
@@ -265,11 +309,9 @@ class App extends Component {
           */}
           <Route component={NotFound} />
         </Switch>
-        </div>
-      
-    )
+      </div>
+    );
   }
-
 }
 
 export default withRouter(App);

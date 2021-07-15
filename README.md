@@ -25,10 +25,6 @@ Lessons: As a user I want to see the Lessons so that I can study
 Add notes: As a user I want to add notes to the lessons
 
 ________________________________________________________________________________
-## Backlog
-
-Full responsive, e-shop, advanced authorization, external API
-________________________________________________________________________________
 ## ROUTES:
 ________________________________________________________________________________
 
