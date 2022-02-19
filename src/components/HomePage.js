@@ -12,7 +12,7 @@ class HomePage extends Component {
             {' '}
             {/* class="bg-img bg" */}
             <h1 className="main-title title ">AGOGE</h1>
-            <p className="main-title message ">powering your learning</p>
+            <p className="main-title message ">empowering your learning</p>
             {/* <h1 className="main-title pr-30">SprachOase</h1>
 
       <div className="pr-30">

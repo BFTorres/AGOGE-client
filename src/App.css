@@ -254,12 +254,14 @@ h1.main-title {
   font-family: 'Roboto';
   color: #7c0e00;
   letter-spacing: 2rem;
+  justify-content: center;
 }
 
 .message {
   font-size: 1rem;
-  letter-spacing: 0.3rem;
+  letter-spacing: 1rem;
   opacity: 0.6;
+  justify-content: center;
 }
 
 /* .title {

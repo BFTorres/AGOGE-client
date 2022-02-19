@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 function Lessons(props) {
+
+
   const showLessons = () => {
     console.log(props?.lessons);
     return props.lessons.map((lessons) => {
